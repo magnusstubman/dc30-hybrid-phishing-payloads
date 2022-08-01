@@ -1,0 +1,29 @@
+<html>
+  <body>
+    <script>
+      function base64ToArrayBuffer(base64) {
+        var binaryString = window.atob(base64);
+        var binaryLen = binaryString.length;
+        var bytes = new Uint8Array(binaryLen);
+        for (var i = 0; i < binaryLen; i++) {
+          var ascii = binaryString.charCodeAt(i);
+          bytes[i] = ascii;
+        }
+        return bytes;
+      }
+
+      b64 = '<insert base64 encoded ISO here>';
+
+      raw = base64ToArrayBuffer(b64);
+      
+      var blob = new Blob([raw], {type: 'application/x-iso9660-image'});
+      var link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      var fileName = 'totally-legit.iso';
+      link.download = fileName;
+      link.click();
+      
+    </script>
+  </body>
+<html>
+
